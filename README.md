@@ -1,5 +1,7 @@
 # My Homelab
 
+<p align="center"><img src="images/rack-photo.jpg" width="380" alt="The homelab in a 10-inch rack"></p>
+
 A self-hosted homelab built from second-hand mini PCs. It's a two-node **Proxmox VE** cluster with a dedicated **backup server**, **highly-available ad-blocking DNS**, a **NAS** for photos and media, and full **monitoring**: a dashboard screen in the rack and push alerts to my phone.
 
 I use it to run the services my household relies on (photos, media, DNS, home automation) and as a place to learn and practise infrastructure, networking and security skills. Each part is documented in its own repository with a full build guide, and this page ties them together.
@@ -36,6 +38,16 @@ I use it to run the services my household relies on (photos, media, DNS, home au
 | **Proxmox Datacenter Manager** | One UI for the cluster and backup server | VM |
 | **Security lab** | Kali, Windows Server (AD) and a Windows 11 client for practice | VMs, started when needed |
 
+## At a glance
+
+The rack screen's status page: every device, server and app, green when healthy.
+
+![Rack screen: status](images/rack-status.png)
+
+The whole cluster and backup server in Proxmox Datacenter Manager:
+
+![Proxmox Datacenter Manager](images/pdm-cluster.png)
+
 ## Architecture
 
 ```mermaid
@@ -68,16 +80,21 @@ flowchart LR
 
 ## Hardware
 
-Everything fits in a **10" mini rack** and is built from used business mini PCs, which are quiet, low-power and cheap.
+Everything lives in a **TecMojo 10" mini rack** and is built from used business mini PCs, which are quiet, low-power and cheap. From top to bottom in the photo:
 
-| Role | Hardware | Notes |
+| Rack slot | Hardware | Role |
 |---|---|---|
-| Hypervisor 1 (`pve1`) | HP mini PC, 6-core, **32 GB** RAM, NVMe (ZFS) | Hosts the NAS VM; the USB RAID enclosure is attached here |
-| Hypervisor 2 (`pve2`) | HP mini PC, 6-core, **16 GB** RAM, NVMe (ZFS) | |
-| Backup server | Lenovo ThinkCentre M700 Tiny, i5-6500T, **16 GB** RAM | 128 GB SATA SSD (OS) + USB HDD (backups) |
-| NAS storage | Multi-bay USB enclosure | Software RAID, ~5.5 TB usable |
-| Network | UniFi router, 2 switches, 1 access point | SNMP-monitored |
-| Display | 10" HDMI screen | Driven directly by a Proxmox node |
+| On top | **Yottamaster YoDas 2-bay** USB enclosure | NAS disks, RAID 1 mirror (~5.5 TB usable), passed to the NAS VM |
+| 1 | **10" HDMI display** | Rack dashboards, driven straight from a Proxmox node |
+| 2 | **UniFi Cloud Gateway Fiber** | Router, firewall, DHCP |
+| 3 | Cable modem | Internet |
+| 4 | **HP EliteDesk Mini** (i5-12500T, 6 cores / 12 threads, **32 GB**, NVMe/ZFS) | Proxmox node `pve1`: NAS VM, Zabbix, Pi-hole 1, apps, lab VMs |
+| 5 | **HP ProDesk Mini** (6 cores / 12 threads, **16 GB**, NVMe/ZFS) | Proxmox node `pve2`: Home Assistant, Grafana/Prometheus, PDM, apps |
+| 6 | Blank panel | Room to grow |
+| 7 | **2× UniFi 5-port switches** | LAN |
+| 8 | **CAT6 patch panel** | Tidy cabling |
+| Elsewhere | **Lenovo ThinkCentre M700 Tiny** (i5-6500T, **16 GB**) + USB HDD | Proxmox Backup Server, QDevice, DNS 2 |
+| Elsewhere | UniFi access point | Wi-Fi |
 
 ## Network
 
