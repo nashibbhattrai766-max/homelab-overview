@@ -84,12 +84,12 @@ Everything lives in a **TecMojo 10" mini rack** and is built from used business 
 
 | Rack slot | Hardware | Role |
 |---|---|---|
-| On top | **Yottamaster YoDas 2-bay** USB enclosure | NAS disks, RAID 1 mirror (~5.5 TB usable), passed to the NAS VM |
+| On top | **Yottamaster YoDas 2-bay** USB enclosure, 2× WD 6 TB | NAS disks, RAID 1 mirror (~5.5 TB usable), passed to the NAS VM |
 | 1 | **10" HDMI display** | Rack dashboards, driven straight from a Proxmox node |
 | 2 | **UniFi Cloud Gateway Fiber** | Router, firewall, DHCP |
 | 3 | Cable modem | Internet |
-| 4 | **HP EliteDesk Mini** (i5-12500T, 6 cores / 12 threads, **32 GB**, NVMe/ZFS) | Proxmox node `pve1`: NAS VM, Zabbix, Pi-hole 1, apps, lab VMs |
-| 5 | **HP ProDesk Mini** (6 cores / 12 threads, **16 GB**, NVMe/ZFS) | Proxmox node `pve2`: Home Assistant, Grafana/Prometheus, PDM, apps |
+| 4 | **HP Elite Mini 600 G9** (i5-12500T, 6C/12T, **32 GB**, 2 TB + 512 GB NVMe) | Proxmox node `pve1`: NAS VM, Zabbix, Pi-hole 1, apps, lab VMs |
+| 5 | **HP ProDesk 600 G6 Mini** (i5-10500T, 6C/12T, **16 GB**, 1 TB + 256 GB NVMe) | Proxmox node `pve2`: Home Assistant, Grafana/Prometheus, PDM, apps |
 | 6 | Blank panel | Room to grow |
 | 7 | **2× UniFi 5-port switches** | LAN |
 | 8 | **CAT6 patch panel** | Tidy cabling |
@@ -141,6 +141,10 @@ DHCP hands out both Pi-holes as DNS servers. Every server has a static IP or a D
 | Monitoring | [rack-display-kiosk](https://github.com/nashibbhattrai766-max/rack-display-kiosk) | A Proxmox node's HDMI port as a kiosk, cross-fading rotator |
 | Storage | [zimaos-on-proxmox](https://github.com/nashibbhattrai766-max/zimaos-on-proxmox) | NAS VM, USB RAID, guest-agent workaround |
 | Media | [jellyfin-zimaos](https://github.com/nashibbhattrai766-max/jellyfin-zimaos) | Personal videos on Google TV |
+| Apps | [gymtracker](https://github.com/nashibbhattrai766-max/gymtracker) | Flutter fitness app + FastAPI backend in Docker, Galaxy Watch sync, AI coach |
+| Smart home | [home-assistant](https://github.com/nashibbhattrai766-max/home-assistant) | HA OS VM, integrations, Google Home via Matter Hub, HA-MCP |
+| Network | [unifi-network](https://github.com/nashibbhattrai766-max/unifi-network) | UCG Fiber, switches, U7 Pro, WireGuard, SNMP and UniFi Poller |
+| Apps | [audiobookshelf](https://github.com/nashibbhattrai766-max/audiobookshelf) | Audiobook server in an LXC |
 
 ## How it's kept safe
 
@@ -164,7 +168,7 @@ DHCP hands out both Pi-holes as DNS servers. Every server has a static IP or a D
 - [ ] Off-site backup copy (3-2-1 rule)
 - [ ] UPS with graceful shutdown
 - [ ] Faster NVMe for the busier node
-- [ ] Add the Home Assistant, Gym app, UniFi and security-lab write-ups
+- [ ] Security-lab write-up
 
 ## License
 
