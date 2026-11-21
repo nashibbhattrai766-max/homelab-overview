@@ -97,33 +97,33 @@ DHCP hands out both Pi-holes as DNS servers. Every server has a static IP or a D
 
 ## The build, in the order I did it
 
-1. **Proxmox cluster.** Two mini PCs, joined into a cluster. Guests can be migrated between nodes, and everything is managed from one UI. → [proxmox-cluster](https://github.com/useruser766-max/proxmox-cluster)
-2. **NAS.** ZimaOS as a VM with a USB RAID enclosure, then Immich for photos. → [zimaos-on-proxmox](https://github.com/useruser766-max/zimaos-on-proxmox)
+1. **Proxmox cluster.** Two mini PCs, joined into a cluster. Guests can be migrated between nodes, and everything is managed from one UI. → [proxmox-cluster](https://github.com/nashibbhattrai766-max/proxmox-cluster)
+2. **NAS.** ZimaOS as a VM with a USB RAID enclosure, then Immich for photos. → [zimaos-on-proxmox](https://github.com/nashibbhattrai766-max/zimaos-on-proxmox)
 3. **DNS.** Pi-hole with Unbound as a private recursive resolver.
-4. **Monitoring.** Zabbix built entirely through its API, then Grafana and Prometheus, then phone alerts through ntfy. → [zabbix-monitoring](https://github.com/useruser766-max/zabbix-monitoring)
-5. **The rack screen.** 17 dashboards designed for a 1280×400 display, driven from a node's HDMI port. → [grafana-rack-dashboards](https://github.com/useruser766-max/grafana-rack-dashboards), [rack-display-kiosk](https://github.com/useruser766-max/rack-display-kiosk)
-6. **Proper backups.** A node crashed during a heavy full-copy backup window, which prompted a dedicated Proxmox Backup Server: incremental, deduplicated, verified, with automatic retention. The nightly run dropped to about 12 minutes. → [proxmox-backup-server](https://github.com/useruser766-max/proxmox-backup-server)
+4. **Monitoring.** Zabbix built entirely through its API, then Grafana and Prometheus, then phone alerts through ntfy. → [zabbix-monitoring](https://github.com/nashibbhattrai766-max/zabbix-monitoring)
+5. **The rack screen.** 17 dashboards designed for a 1280×400 display, driven from a node's HDMI port. → [grafana-rack-dashboards](https://github.com/nashibbhattrai766-max/grafana-rack-dashboards), [rack-display-kiosk](https://github.com/nashibbhattrai766-max/rack-display-kiosk)
+6. **Proper backups.** A node crashed during a heavy full-copy backup window, which prompted a dedicated Proxmox Backup Server: incremental, deduplicated, verified, with automatic retention. The nightly run dropped to about 12 minutes. → [proxmox-backup-server](https://github.com/nashibbhattrai766-max/proxmox-backup-server)
 7. **Surviving a node failure.** The backup server also became the cluster's QDevice, so either node can go down and the cluster keeps quorum.
-8. **Photo backups.** The Immich library backs up to PBS nightly from the NAS. → [immich-pbs-backup](https://github.com/useruser766-max/immich-pbs-backup)
-9. **DNS failover.** A second Pi-hole on the backup server, kept in sync automatically. Building it uncovered that the router had been hijacking DNS. → [pihole-ha-dns](https://github.com/useruser766-max/pihole-ha-dns)
-10. **One pane of glass.** Proxmox Datacenter Manager for the cluster and backup server together. → [proxmox-datacenter-manager](https://github.com/useruser766-max/proxmox-datacenter-manager)
-11. **Media.** Jellyfin for personal videos on the TV. → [jellyfin-zimaos](https://github.com/useruser766-max/jellyfin-zimaos)
+8. **Photo backups.** The Immich library backs up to PBS nightly from the NAS. → [immich-pbs-backup](https://github.com/nashibbhattrai766-max/immich-pbs-backup)
+9. **DNS failover.** A second Pi-hole on the backup server, kept in sync automatically. Building it uncovered that the router had been hijacking DNS. → [pihole-ha-dns](https://github.com/nashibbhattrai766-max/pihole-ha-dns)
+10. **One pane of glass.** Proxmox Datacenter Manager for the cluster and backup server together. → [proxmox-datacenter-manager](https://github.com/nashibbhattrai766-max/proxmox-datacenter-manager)
+11. **Media.** Jellyfin for personal videos on the TV. → [jellyfin-zimaos](https://github.com/nashibbhattrai766-max/jellyfin-zimaos)
 12. **Housekeeping.** A read-only audit script for each node that finds stuck processes, dead mounts, forgotten ISOs, old snapshots and missing backups. It found two real problems on its first run.
 
 ## Repositories
 
 | Area | Repo | Highlights |
 |---|---|---|
-| Virtualisation | [proxmox-cluster](https://github.com/useruser766-max/proxmox-cluster) | 2 nodes + QDevice, node audit script, backup-age exporter, NIC hang fix |
-| Backups | [proxmox-backup-server](https://github.com/useruser766-max/proxmox-backup-server) | Full PBS build on a mini PC, retention/GC/verify, least-privilege users, monitoring |
-| Backups | [immich-pbs-backup](https://github.com/useruser766-max/immich-pbs-backup) | Photo library → PBS from an appliance NAS, in a container |
-| Management | [proxmox-datacenter-manager](https://github.com/useruser766-max/proxmox-datacenter-manager) | One UI for everything, VM script, boot fix |
-| DNS | [pihole-ha-dns](https://github.com/useruser766-max/pihole-ha-dns) | Two Pi-holes, nebula-sync, Unbound, the DNS-hijack investigation |
-| Monitoring | [zabbix-monitoring](https://github.com/useruser766-max/zabbix-monitoring) | Zabbix as code via the API, SNMP, JS preprocessing, NOC dashboard, ntfy |
-| Monitoring | [grafana-rack-dashboards](https://github.com/useruser766-max/grafana-rack-dashboards) | 17 rack-screen dashboards, one-command deploy |
-| Monitoring | [rack-display-kiosk](https://github.com/useruser766-max/rack-display-kiosk) | A Proxmox node's HDMI port as a kiosk, cross-fading rotator |
-| Storage | [zimaos-on-proxmox](https://github.com/useruser766-max/zimaos-on-proxmox) | NAS VM, USB RAID, guest-agent workaround |
-| Media | [jellyfin-zimaos](https://github.com/useruser766-max/jellyfin-zimaos) | Personal videos on Google TV |
+| Virtualisation | [proxmox-cluster](https://github.com/nashibbhattrai766-max/proxmox-cluster) | 2 nodes + QDevice, node audit script, backup-age exporter, NIC hang fix |
+| Backups | [proxmox-backup-server](https://github.com/nashibbhattrai766-max/proxmox-backup-server) | Full PBS build on a mini PC, retention/GC/verify, least-privilege users, monitoring |
+| Backups | [immich-pbs-backup](https://github.com/nashibbhattrai766-max/immich-pbs-backup) | Photo library → PBS from an appliance NAS, in a container |
+| Management | [proxmox-datacenter-manager](https://github.com/nashibbhattrai766-max/proxmox-datacenter-manager) | One UI for everything, VM script, boot fix |
+| DNS | [pihole-ha-dns](https://github.com/nashibbhattrai766-max/pihole-ha-dns) | Two Pi-holes, nebula-sync, Unbound, the DNS-hijack investigation |
+| Monitoring | [zabbix-monitoring](https://github.com/nashibbhattrai766-max/zabbix-monitoring) | Zabbix as code via the API, SNMP, JS preprocessing, NOC dashboard, ntfy |
+| Monitoring | [grafana-rack-dashboards](https://github.com/nashibbhattrai766-max/grafana-rack-dashboards) | 17 rack-screen dashboards, one-command deploy |
+| Monitoring | [rack-display-kiosk](https://github.com/nashibbhattrai766-max/rack-display-kiosk) | A Proxmox node's HDMI port as a kiosk, cross-fading rotator |
+| Storage | [zimaos-on-proxmox](https://github.com/nashibbhattrai766-max/zimaos-on-proxmox) | NAS VM, USB RAID, guest-agent workaround |
+| Media | [jellyfin-zimaos](https://github.com/nashibbhattrai766-max/jellyfin-zimaos) | Personal videos on Google TV |
 
 ## How it's kept safe
 
